@@ -1,0 +1,34 @@
+services:
+  postgres:
+    container_name: book_social_network_db
+    image: postgres:16.2
+    environment:
+      POSTGRES_DB: book_social_network
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: amazigh
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - spring-app
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+  mail-dev:
+    container_name: mail_dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+    restart: unless-stopped
+    networks:
+      - spring-app
+
+volumes:
+  postgres:
+    driver: local
+
+networks:
+  spring-app:
+    driver: bridge
