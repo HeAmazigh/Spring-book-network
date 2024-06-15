@@ -2,8 +2,6 @@ package com.amazigh.booknetwork.DTO;
 
 import jakarta.validation.constraints.*;
 
-import java.time.LocalDate;
-
 public record RegisterRequest(
     @NotEmpty(message = "First name can not be empty")
     @NotBlank(message = "First name can not be empty")

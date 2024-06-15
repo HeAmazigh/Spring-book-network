@@ -60,6 +60,15 @@ public class GlobalException {
     );
   }
 
+  @ExceptionHandler(BookNotFoundException.class)
+  public ResponseEntity<ExceptionResponse> handleBookNotFoundException(BookNotFoundException exp) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        ExceptionResponse.builder()
+            .error(exp.getMessage())
+            .build()
+    );
+  }
+
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<ExceptionResponse> handleException(MethodArgumentNotValidException exp) {
     Set<String> errors = new HashSet<>();
@@ -70,6 +79,15 @@ public class GlobalException {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
         ExceptionResponse.builder()
             .validationErrors(errors)
+            .build()
+    );
+  }
+
+  @ExceptionHandler(OperationNotPermittedException.class)
+  public ResponseEntity<ExceptionResponse> handleOperationNotPermittedException(OperationNotPermittedException exp) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+        ExceptionResponse.builder()
+            .error(exp.getMessage())
             .build()
     );
   }
