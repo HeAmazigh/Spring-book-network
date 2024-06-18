@@ -1,6 +1,5 @@
 package com.amazigh.booknetwork.config;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 import static org.springframework.http.HttpHeaders.*;
 
@@ -49,7 +47,7 @@ public class BeansConfig {
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+    configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:8088"));
     configuration.setAllowedHeaders(Arrays.asList(AUTHORIZATION, ACCEPT, CONTENT_TYPE, ORIGIN));
     configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH"));
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
